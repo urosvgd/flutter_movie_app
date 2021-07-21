@@ -5,16 +5,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/repository/movie_repository.dart';
 import 'package:movies_app/service/movie_api_client.dart';
 
 part 'movies_event.dart';
 part 'movies_state.dart';
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
-  final ApiClient apiClient;
+  final MovieRepository movieRepository;
   int page = 1;
 
-  MoviesBloc({this.apiClient}): super(MoviesInitial());
+  MoviesBloc({this.movieRepository}): super(MoviesInitial());
 
   MoviesState get initialState => MoviesInitial();
 
@@ -24,13 +25,13 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     if (event is FetchMovies && !_hasReachedMax(currentState)) {
       try {
         if (currentState is MoviesInitial) {
-          final movies = await apiClient.fetchMovies(page: page);
+          final movies = await movieRepository.fetchMovies(page: page);
           yield MoviesSuccess(movies: movies, hasReachedMax: false);
           return;
         }
 
         if (currentState is MoviesSuccess) {
-          final movies = await apiClient.fetchMovies(page: ++page);
+          final movies = await movieRepository.fetchMovies(page: ++page);
           yield movies.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : MoviesSuccess(
