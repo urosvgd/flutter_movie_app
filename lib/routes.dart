@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/screens/home_page.dart';
-import 'package:movies_app/screens/movie_details.dart';
+import 'package:movies_app/screens/movie_details_page.dart';
+import 'package:movies_app/screens/search_page.dart';
+import 'screens/movie_details_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -13,15 +14,24 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/movieDetails':
         // Validation of correct data type
-        if (args is Movie) {
+        if (args is int) {
           return MaterialPageRoute(
-            builder: (_) => MovieDetails(
+            builder: (_) => MovieDetailsPage(
               data: args,
             ),
           );
         }
+        break;
+
+        case '/searchMovie':
+          return MaterialPageRoute(
+            builder: (_) => SearchPage()
+          );
+        // Validation of correct data type
+        
         // If args is not of the correct type, return an error page.
         // You can also throw an exception while in development.
+        
         return _errorRoute();
       default:
         // If there is no such named route in the switch statement, e.g. /third

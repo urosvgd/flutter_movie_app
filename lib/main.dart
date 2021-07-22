@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         /* dark theme settings */
       ),
       themeMode: ThemeMode.dark, 
-      initialRoute: '/',
+      // initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       home: BlocProvider(
         create: (context) =>

@@ -6,3 +6,8 @@ abstract class MoviesEvent extends Equatable {
 }
 
 class FetchMovies extends MoviesEvent {}
+
+class FetchMovie extends MoviesEvent {
+  final String movieName;
+  FetchMovie({this.movieName});
+}

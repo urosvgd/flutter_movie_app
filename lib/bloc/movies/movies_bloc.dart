@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/repository/movie_repository.dart';
-import 'package:movies_app/service/movie_api_client.dart';
 
 part 'movies_event.dart';
 part 'movies_state.dart';
