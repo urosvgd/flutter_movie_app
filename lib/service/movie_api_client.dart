@@ -58,13 +58,4 @@ class ApiClient {
     return movieCast;
   }
 
-  Future<Person> fetchPerson({int id}) async {
-    final url = '$baseUrl/person/$id?api_key=$apiKey';
-    final response = await httpClient.get(Uri.parse(url));
-
-    final decodedJson = jsonDecode(response.body);
-
-    print(decodedJson);
-
-  }
 }
